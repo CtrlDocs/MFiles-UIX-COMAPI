@@ -1,0 +1,28 @@
+{
+  "name": "mfiles-uix-comapi",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Solution-Management/MFiles-UIX-COMAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Solution-Management/MFiles-UIX-COMAPI/issues"
+  },
+  "homepage": "https://github.com/Solution-Management/MFiles-UIX-COMAPI#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "babel-loader": "^10.0.0",
+    "terser-webpack-plugin": "^5.3.14",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
+  }
+}
