@@ -19,7 +19,7 @@ CtrlDocs.MFilesError = class MFilesError {
      * @param errorTitle {string}
      * @return {(String) => (VnextError) => (CtrlDocs.MFilesError)}
      */
-    static GetVnextErrorHandler(shellFrame) {
+    static GetVnextErrorHandler(errorTitle) {
         return (errorObj) => {
             return new CtrlDocs.MFilesError(
                 errorObj.message,
