@@ -42,14 +42,14 @@ CtrlDocs.ObjectPropertyOperations = class ObjectPropertyOperations {
                                 properties: extObjectInfo.latest_version.properties
                             })
                         )
-                    }).catch(errorObj => reject(getVnextErrorHandler(errorMessage)(errorObj)))
+                    }).catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(errorObj)))
             }
             else {
                 this.#nativeAsync.SetProperties(
                     objVer.GetNative(), propertyValues.GetNative(),
                     (objectVersionAndProperties) => resolve(
                         new CtrlDocs.ObjectVersionAndProperties(objectVersionAndProperties)
-                    ), (short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
+                    ), (short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
                     function () {
                     }
                 );

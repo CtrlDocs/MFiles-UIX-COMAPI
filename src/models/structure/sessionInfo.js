@@ -58,7 +58,7 @@ CtrlDocs.SessionInfo = class SessionInfo {
             else {
                 this.#native.CheckObjectAccess(acl.GetNative(), desiredAccess,
                     (result) => resolve(result),
-                    (short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
+                    (short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
                     function () {}
                 );
             }

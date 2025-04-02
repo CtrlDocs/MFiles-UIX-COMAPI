@@ -37,13 +37,13 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
                     .then(objectDataOfMultipleObjects => resolve(
                             new CtrlDocs.ObjectVersionAndProperties(objectDataOfMultipleObjects.results[0].object_data)
                         )
-                    ).catch(errorObj => reject(getVnextErrorHandler(errorMessage)(errorObj)))
+                    ).catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(errorObj)))
             }
             else this.#nativeAsync.GetObjectVersionAndProperties(objVer.GetNative(), updateFromServer,
                 (objectVersionAndProperties) => resolve(
                     new CtrlDocs.ObjectVersionAndProperties(objectVersionAndProperties)
                 ),
-                (short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
+                (short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
                 function () {
                 }
             );            
@@ -67,13 +67,13 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
                 });
                 return this.GetObjectInfo(requestedObjVer)
                     .then(objectVersion => resolve(objectVersion.ObjVer))
-                    .catch(errorObj => reject(getVnextErrorHandler(errorObj)));
+                    .catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorObj)));
                 
             } else this.#nativeAsync.GetLatestObjVer(objID.GetNative(), allowCheckedOut, updateFromServer,
                 (objVer) => resolve(
                     new CtrlDocs.ObjVer(objVer)
                 ),
-                (short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
+                (short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
                 function () {}
             );
         });
@@ -104,13 +104,13 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
                     .then(objectDataOfMultipleObjects => resolve(
                             new CtrlDocs.ObjectVersion(objectDataOfMultipleObjects.results[0].object_data.object_version, this.#vault)
                         )
-                    ).catch(errorObj => reject(getVnextErrorHandler(errorMessage)(errorObj)))
+                    ).catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(errorObj)))
             }
             else this.#nativeAsync.GetObjectInfo(objVer.GetNative(), latestVersion, updateFromServer,
                 (objectVersion) => resolve(
                     new CtrlDocs.ObjectVersion(objectVersion, this.#vault)
                 ),
-                (short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
+                (short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
                 function () {}
             );
         });
@@ -135,13 +135,13 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
                     .then(checkOutMultipleResponse => resolve(
                             new CtrlDocs.ObjectVersion(checkOutMultipleResponse.checked_out_versions[0].object_version, this.#vault)
                         )
-                    ).catch(errorObj => reject(getVnextErrorHandler(errorMessage)(errorObj)))
+                    ).catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(errorObj)))
                 
             } else this.#nativeAsync.CheckOut(objID.GetNative(),
                 (objectVersion) => resolve(
                     new CtrlDocs.ObjectVersion(objectVersion, this.#vault)
                 ),
-                (short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
+                (short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
                 () => {
                 }
             );
@@ -168,13 +168,13 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
                             objectVersion: new CtrlDocs.ObjectVersion(checkInMultipleResponse.results[0].latest_version.object_version, this.#vault),
                             propertyValues: new CtrlDocs.PropertyValues(checkInMultipleResponse.results[0].latest_version.properties)
                         })
-                    ).catch(errorObj => reject(getVnextErrorHandler(errorMessage)(errorObj)))
+                    ).catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(errorObj)))
             } else this.#nativeAsync.CheckIn(objVer.GetNative(),
                 (objectVersion) => resolve({
                     objectVersion: new CtrlDocs.ObjectVersion(objectVersion, this.#vault),
                     propertyValues: new CtrlDocs.PropertyValues()
                 }),
-                (short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
+                (short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
                 () => {
                 }
             );
@@ -201,13 +201,13 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
                     .then(undoCheckOutMultipleResponse => resolve(
                             new CtrlDocs.ObjectVersion(undoCheckOutMultipleResponse.results[0].latest_version.object_version, this.#vault)
                         )
-                    ).catch(errorObj => reject(getVnextErrorHandler(errorMessage)(errorObj)))
+                    ).catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(errorObj)))
             }
             else this.#nativeAsync.UndoCheckout(objVer.GetNative(), 
                 (objectVersion) => resolve(
                     new CtrlDocs.ObjectVersion(objectVersion, this.#vault)
                 ), 
-                (short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
+                (short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
                 () => {}
             );
         });
@@ -227,7 +227,7 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
                     return this.GetLatestObjVer(objVer.ObjID)
                         .then(latestObjVer => this.ShowBasicEditObjectWindow(window, latestObjVer))
                         .then(resolve)
-                        .catch(errorObj => reject(getVnextErrorHandler(errorMessage)(errorObj)));
+                        .catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(errorObj)));
                 }
 
                 MFiles.ShowEditObjectWindow(objVer.GetNative(), {}).then(objectWindowResult => {
@@ -242,7 +242,7 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
                         resolve(
                             new CtrlDocs.ObjectWindowResult(objectWindowResult)
                         )
-                    ,(short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)) 
+                    ,(short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)) 
                 );
             }
         });
@@ -281,12 +281,12 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
                     .then(deletedObjects => resolve(
                             new CtrlDocs.ObjectVersion(deletedObjects[0], this.#vault)
                         )
-                    ).catch(errorObj => reject(getVnextErrorHandler(errorMessage)(errorObj)))
+                    ).catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(errorObj)))
             } else return new CtrlDocs.ObjectVersion(
                 this.#nativeAsync.DeleteObject(
                     objID.GetNative(),
                     (objectVersion) => resolve(new CtrlDocs.ObjectVersion(objectVersion, this.#vault)),
-                    (short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
+                    (short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
                     () => {}
                 )
                 , this.#vault);
@@ -334,7 +334,7 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
                         resolve(
                             new CtrlDocs.ObjectWindowResult(objectWindowResult)
                         )
-                    ,(short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj))
+                    ,(short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj))
                 );
             }
         });
@@ -365,7 +365,7 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
                             objectVersionAndPermissions
                         )
                     ),
-                    (short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
+                    (short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
                     () => {}
                 );
             }

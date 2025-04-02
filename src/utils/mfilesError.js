@@ -13,6 +13,36 @@ CtrlDocs.MFilesError = class MFilesError {
         //this.longError = longError;
         this.obj = errorObj;
     }
+
+    /**
+     * Function to return an error handler to be used in vnext api calls
+     * @param errorTitle {string}
+     * @return {(String) => (VnextError) => (CtrlDocs.MFilesError)}
+     */
+    static GetVnextErrorHandler(shellFrame) {
+        return (errorObj) => {
+            return new CtrlDocs.MFilesError(
+                errorObj.message,
+                errorObj,
+                errorTitle
+            )
+        }
+    }
+
+    /**
+     * Function to return an error handler to be used in vnext api calls
+     * @param errorTitle {string}
+     * @return {(string) => (string, string, object) => (CtrlDocs.MFilesError)}
+     */
+    static GetLegacyAsyncErrorHandler(errorTitle) {
+        return (shortMessage, longMessage, errorObj) => {
+            return new CtrlDocs.MFilesError(
+                shortMessage,
+                errorObj,
+                errorTitle
+            )
+        }
+    }
 }
 
 /**
@@ -23,34 +53,3 @@ CtrlDocs.MFilesError = class MFilesError {
  * @property {string} shortMessage
  * @property {number} statusCode
  */
-
-
-/**
- * Function to return an error handler to be used in vnext api calls
- * @param errorTitle {string}
- * @return {(String) => (VnextError) => (CtrlDocs.MFilesError)}
- */
-function getVnextErrorHandler(errorTitle) {
-    return (errorObj) => {
-        return new CtrlDocs.MFilesError(
-            errorObj.message,
-            errorObj,
-            errorTitle
-        )
-    }
-}
-
-/**
- * Function to return an error handler to be used in vnext api calls
- * @param errorTitle {string}
- * @return {(string) => (string, string, object) => (CtrlDocs.MFilesError)}
- */
-function getLegacyAsyncErrorHandler(errorTitle) {
-    return (shortMessage, longMessage, errorObj) => {
-        return new CtrlDocs.MFilesError(
-            shortMessage,
-            errorObj,
-            errorTitle
-        )
-    }
-}

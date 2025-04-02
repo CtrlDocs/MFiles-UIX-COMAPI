@@ -33,13 +33,13 @@ CtrlDocs.ExtensionMethodOperations = class ExtensionMethodOperations {
                 this.#native
                     .RunExtensionMethod(input)
                     .then(response => resolve(response.output))
-                    .catch(error => reject(getVnextErrorHandler(errorMessage)(error)));
+                    .catch(error => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(error)));
             }
             else {
                 this.#nativeAsync.ExecuteVaultExtensionMethod(methodIdentifier, data,
                     resolve,
                     (short, long, obj) => {
-                        reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj));
+                        reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj));
                     },
                     () => {}
                 );

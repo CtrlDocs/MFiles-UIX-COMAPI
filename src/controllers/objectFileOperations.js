@@ -35,7 +35,7 @@ CtrlDocs.ObjectFileOperations = class ObjectFileOperations {
                     .then(objectDataOfMultipleObjects => resolve(
                             new CtrlDocs.ObjectFiles(objectDataOfMultipleObjects.results[0].object_data.object_version.version_info.files)
                         )
-                    ).catch(errorObj => reject(getVnextErrorHandler(errorMessage)(errorObj)))
+                    ).catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(errorObj)))
             }
             else if (CtrlDocs.Platform.GetPlatform() === UixPlatform.LEGACY_CLIENT) {
                 resolve(
@@ -51,7 +51,7 @@ CtrlDocs.ObjectFileOperations = class ObjectFileOperations {
                             files
                         )
                     ), 
-                    (short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
+                    (short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
                     function () {}
                 );
             }
