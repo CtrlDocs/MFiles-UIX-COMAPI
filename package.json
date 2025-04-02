@@ -3,13 +3,13 @@
   "version": "1.0.1",
   "description": "A wrapper for M-Files UIX and UIX v2 to conform with the COM API and abstract away all platform dependent quirks.",
   "keywords": [],
-  "homepage": "https://github.com/Solution-Management/MFiles-UIX-COMAPI#readme",
+  "homepage": "https://github.com/CtrlDocs/MFiles-UIX-COMAPI#readme",
   "bugs": {
-    "url": "https://github.com/Solution-Management/MFiles-UIX-COMAPI/issues"
+    "url": "https://github.com/CtrlDocs/MFiles-UIX-COMAPI/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Solution-Management/MFiles-UIX-COMAPI.git"
+    "url": "git+https://github.com/CtrlDocs/MFiles-UIX-COMAPI.git"
   },
   "license": "ISC",
   "author": "Frederik Madsen",
