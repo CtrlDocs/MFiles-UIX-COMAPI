@@ -1,6 +1,6 @@
 {
   "name": "@ctrldocs/mfiles-uix-comapi",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A wrapper for M-Files UIX and UIX v2 to conform with the COM API and abstract away all platform dependent quirks.",
   "keywords": [],
   "homepage": "https://github.com/CtrlDocs/MFiles-UIX-COMAPI#readme",
