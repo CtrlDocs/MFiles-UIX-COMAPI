@@ -6,7 +6,7 @@ module.exports = [{
         mode: 'development', // Set mode to development for non-minified output
         entry: './src/index.js', // Entry point for the non-minified bundle
         output: {
-            filename: 'app.js', // Output file name for non-minified bundle
+            filename: 'mfiles-uix-comapi.js', // Output file name for non-minified bundle
             path: path.resolve(__dirname, 'dist'), // Output directory
         },
         devtool: 'source-map', // Generate source maps for development
@@ -28,7 +28,7 @@ module.exports = [{
         mode: 'production', // Set mode to production for minified output
         entry: './src/index.js', // Entry point for the minified bundle
         output: {
-            filename: 'app.min.js', // Output file name for minified bundle
+            filename: 'mfiles-uix-comapi.min.js', // Output file name for minified bundle
             path: path.resolve(__dirname, 'dist'), // Output directory
         },
         devtool: 'source-map', // Generate source maps for production
