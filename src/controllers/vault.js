@@ -15,31 +15,48 @@ CtrlDocs.Vault = class Vault {
     /** @type {CtrlDocs.ShellFrame} */
     ShellFrame;
 
-    constructor(native, shellFrame) {
-        this.#native = native;
+    /**
+     * @param vault {MFiles.Vault}
+     * @param sessionInfo {MFiles.SessionInfo}
+     * @param shellFrame {CtrlDocs.ShellFrame}
+     */
+    constructor(vault, sessionInfo, shellFrame) {
+        this.#native = vault;
         this.ShellFrame = shellFrame;
-        this.ObjectOperations = new CtrlDocs.ObjectOperations(
-            this.#native.ObjectOperations, this.#native.Async?.ObjectOperations, this);
-        this.ObjectFileOperations = new CtrlDocs.ObjectFileOperations(
-            this.#native.ObjectFileOperations, this.#native.Async?.ObjectFileOperations, this);
-        this.ObjectPropertyOperations = new CtrlDocs.ObjectPropertyOperations(
-            this.#native.ObjectPropertyOperations, this.#native.Async?.ObjectPropertyOperations, this);
-        
-        if (CtrlDocs.Platform.IsNextGen()) {
-            this.ExtensionMethodOperations = new CtrlDocs.ExtensionMethodOperations(this.#native.VaultExtensionMethodsOperations);
-            this.SessionInfo = new CtrlDocs.SessionInfo(
-                window.parent.MFiles._appData.mFilesCommon.getSessionInfo(),
-                null,
-                this
-            )
-        } else {
-            this.SessionInfo = new CtrlDocs.SessionInfo(
-                this.#native.SessionInfo, this.#native.Async?.SessionInfo, this);
-            this.ExtensionMethodOperations = new CtrlDocs.ExtensionMethodOperations(
-                this.#native.ExtensionMethodOperations, this.#native.Async?.ExtensionMethodOperations);
-            this.ViewOperations = new CtrlDocs.ViewOperations(
-                this.#native.ViewOperations, this.#native.Async?.ViewOperations); // TODO  does not exist
-        }
+        this.ObjectOperations = new CtrlDocs.ObjectOperations(this);
+        this.ObjectFileOperations = new CtrlDocs.ObjectFileOperations(this);
+        this.ObjectPropertyOperations = new CtrlDocs.ObjectPropertyOperations(this);
+        this.ExtensionMethodOperations = new CtrlDocs.ExtensionMethodOperations(this);
+        this.ViewOperations = new CtrlDocs.ViewOperations(this);
+        this.SessionInfo = new CtrlDocs.SessionInfo(sessionInfo, this);
+    }
+
+    /**
+     * Helper function to get a CtrlDocs.Vault from a ShellFrame as a promise.
+     * The challenge being that the sessioninfo in vnext in async.
+     * @param shellFrame {CtrlDocs.ShellFrame}
+     * @returns {Promise<CtrlDocs.Vault>}
+     */
+    static FromShellFrame(shellFrame) {
+        return new Promise((resolve, reject) => {
+            const vault = shellFrame.ShellUI.Vault;
+
+            if (CtrlDocs.Platform.IsNextGen()) {
+                MFiles.GetSessionInfo().then(sessionInfo => {
+                    MFiles.GetVaultInfo().then(vaultInfo => {
+                        sessionInfo.vault_data.vault_attachment = vaultInfo.GUID;
+                        resolve(new CtrlDocs.Vault(vault, sessionInfo, shellFrame));
+                    });
+                });
+                return;
+            }
+
+            const sessionInfo = CtrlDocs.Platform.GetPlatform() === UixPlatform.LEGACY_CLIENT 
+                ? vault.SessionInfo 
+                : vault.Async.SessionInfo;
+
+            resolve(new CtrlDocs.Vault(vault, sessionInfo, shellFrame));
+        });
     }
     
     get CurrentLoggedInUserID() {

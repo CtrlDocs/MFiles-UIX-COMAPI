@@ -4,15 +4,12 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
     #vault;
 
     /**
-     * 
-     * @param native
-     * @param nativeAsync
      * @param vault {CtrlDocs.Vault}
      */
-    constructor(native, nativeAsync, vault) {
-        this.#native = native;
-        this.#nativeAsync = nativeAsync;
+    constructor(vault) {
         this.#vault = vault;
+        this.#native = vault.GetNative().ObjectOperations;
+        this.#nativeAsync = vault.GetNative().Async?.ObjectOperations;
     }
 
     /**

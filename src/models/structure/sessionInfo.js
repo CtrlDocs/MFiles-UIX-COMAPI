@@ -1,7 +1,6 @@
 CtrlDocs.SessionInfo = class SessionInfo {
-    #native;
-    #nativeAsync;
     #vault;
+    #native;
 
     /**
      * 
@@ -9,10 +8,9 @@ CtrlDocs.SessionInfo = class SessionInfo {
      * @param nativeAsync
      * @param vault {CtrlDocs.Vault}
      */
-    constructor(native, nativeAsync, vault) {
-        this.#native = native;
-        this.#nativeAsync = nativeAsync;
+    constructor(native, vault) {
         this.#vault = vault;
+        this.#native = native;
     }
 
     get LicenseAllowsModifications() {
@@ -58,7 +56,7 @@ CtrlDocs.SessionInfo = class SessionInfo {
                 );
             }
             else {
-                this.#nativeAsync.CheckObjectAccess(acl.GetNative(), desiredAccess,
+                this.#native.CheckObjectAccess(acl.GetNative(), desiredAccess,
                     (result) => resolve(result),
                     (short, long, obj) => reject(getLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
                     function () {}

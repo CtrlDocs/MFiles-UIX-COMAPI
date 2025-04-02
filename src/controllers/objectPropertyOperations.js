@@ -3,10 +3,13 @@ CtrlDocs.ObjectPropertyOperations = class ObjectPropertyOperations {
     #nativeAsync;
     #vault;
 
-    constructor(native, nativeAsync, vault) {
-        this.#native = native;
-        this.#nativeAsync = nativeAsync;
+    /**
+     * @param vault {CtrlDocs.Vault}
+     */
+    constructor(vault) {
         this.#vault = vault;
+        this.#native = vault.GetNative().ObjectPropertyOperations;
+        this.#nativeAsync = vault.GetNative().Async?.ObjectPropertyOperations;
     }
 
     /**

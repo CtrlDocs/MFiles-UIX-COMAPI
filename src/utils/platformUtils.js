@@ -6,6 +6,8 @@ const UixPlatform = Object.freeze({
     VNEXT_WEB: 'web'
 }); 
 
+window.UixPlatform = UixPlatform;
+
 if (typeof CtrlDocs.Platform === 'undefined') {
     CtrlDocs.Platform = {
         Current: UixPlatform.UNDEFINED

@@ -1,10 +1,18 @@
 CtrlDocs.ExtensionMethodOperations = class ExtensionMethodOperations {
+    #vault;
     #native;
     #nativeAsync;
 
-    constructor(native, nativeAsync) {
-        this.#native = native;
-        this.#nativeAsync = nativeAsync;
+    
+    /**
+     * @param vault {CtrlDocs.Vault}
+     */
+    constructor(vault) {
+        this.#vault = vault;
+        this.#native = CtrlDocs.Platform.IsNextGen() 
+            ? vault.GetNative().VaultExtensionMethodsOperations 
+            : vault.GetNative().ExtensionMethodOperations;
+        this.#nativeAsync = vault.GetNative().Async?.ExtensionMethodOperations;
     }
 
     /**
