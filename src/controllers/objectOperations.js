@@ -51,6 +51,29 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
     }
 
     /**
+     * Get the Object ID by its GUID
+     * @param {string} guid 
+     * @returns {Promise<CtrlDocs.ObjID>}
+     */
+    GetObjIDByGUID(guid) {
+        const errorMessage = `Get ObjID By GUID Failed`;
+
+        return new Promise((resolve, reject) => {
+            if (CtrlDocs.Platform.IsNextGen()) {
+                this.#native.GetObjIDByGUID(guid)
+                    .then(objID => resolve(new CtrlDocs.ObjID(objID.obj_id)))
+                    .catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(errorObj)))
+            }
+            else this.#nativeAsync.GetObjIDByGUID(guid,
+                (objID) => resolve(new CtrlDocs.ObjID(objID)),
+                (short, long, obj) => reject(CtrlDocs.MFilesError.GetLegacyAsyncErrorHandler(errorMessage)(short, long, obj)),
+                function () {}
+            );
+        });
+    }
+
+
+    /**
      * @param objID {CtrlDocs.ObjID}
      * @param allowCheckedOut {boolean}
      * @param updateFromServer {boolean}
