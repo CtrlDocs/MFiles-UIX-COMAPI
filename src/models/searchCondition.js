@@ -50,6 +50,7 @@ CtrlDocs.SearchCondition = class SearchCondition {
         }
         else return new CtrlDocs.TypedValue(this.#native.TypedValue);
     }
+    
     set TypedValue(value) {
         if (CtrlDocs.Platform.IsNextGen()) {
             this.#native.value = value.GetNative();
