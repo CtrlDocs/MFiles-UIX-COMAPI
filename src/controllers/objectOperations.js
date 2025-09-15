@@ -60,7 +60,9 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
 
         return new Promise((resolve, reject) => {
             if (CtrlDocs.Platform.IsNextGen()) {
-                this.#native.GetObjIDByGUID(guid)
+                this.#native.GetObjIDByGUID({
+                    guid: guid
+                })
                     .then(objID => resolve(new CtrlDocs.ObjID(objID.obj_id)))
                     .catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(errorObj)))
             }
