@@ -13,7 +13,7 @@ CtrlDocs.ObjOrFileVers = class ObjOrFileVers extends Array {
 
     static ConvertFromNative(native) {
         if (!native) return [];
-        if (isNumber(native)) return [native];
+        if (CtrlDocs.JsUtils.isNumber(native)) return [native];
         if (CtrlDocs.Platform.IsNextGen()) {
             return [];
         } else {

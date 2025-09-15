@@ -1,55 +1,43 @@
-CtrlDocs.PropertyValues = class PropertyValues extends Array {
+CtrlDocs.ObjectSearchResults = class ObjectSearchResults extends Array {
     constructor(native) {
         super(
-            ...CtrlDocs.PropertyValues.ConvertFromNative(native)
+            ...CtrlDocs.ObjectSearchResults.ConvertFromNative(native)
         );
     }
 
     static CreateNative() {
         if (CtrlDocs.Platform.IsNextGen()) {
-            return []
-        } else return new MFiles.PropertyValues();
+            return [];
+        } else return new MFiles.ObjectVersions();
     }
 
     static ConvertFromNative(native) {
         if (!native) return [];
         if (CtrlDocs.JsUtils.isNumber(native)) return [native];
         if (CtrlDocs.Platform.IsNextGen()) {
-            return native.map(it => new CtrlDocs.PropertyValue(it));
+            return native.map(it => new CtrlDocs.ObjectVersion(it));
         } else {
-            return Array.from(native).map(it => new CtrlDocs.PropertyValue(it));
+            return Array.from(native).map(it => new CtrlDocs.ObjectVersion(it));
         }
     }
 
     get Count() {
         return this.length;
     }
-
+    
     // Methods
 
     /**
-     * Adds a CtrlDocs.PropertyValue to the collection
+     * Adds a CtrlDocs.ObjVer to the collection
      * @param index {number}
-     * @param value {CtrlDocs.PropertyValue}
+     * @param value {CtrlDocs.ObjVer}
      */
     Add(index, value) {
         this.push(value);
     }
 
-    IndexOf(id) {
-        return this.findIndex(it => it.PropertyDef === id);
-    }
-
-    Item(id) {
-        return this[id];
-    }
-    
-    toJSON() {
-        return this.map(it => it.toJSON());
-    }
-
     GetNative() {
-        const nativeObject = CtrlDocs.PropertyValues.CreateNative();
+        const nativeObject = CtrlDocs.ObjectSearchResults.CreateNative();
         if (CtrlDocs.Platform.IsNextGen()) {
             this.forEach(it => {
                 nativeObject.push(it.GetNative());

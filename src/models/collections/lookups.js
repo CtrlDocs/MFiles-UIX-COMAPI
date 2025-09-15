@@ -15,7 +15,7 @@ CtrlDocs.Lookups = class Lookups extends Array {
     
     static ConvertFromNative(native) {
         if (!native) return [];
-        if (isNumber(native)) return [native];
+        if (CtrlDocs.JsUtils.isNumber(native)) return [native];
         if (CtrlDocs.Platform.IsNextGen()) {
             return native.values.map(it => new CtrlDocs.Lookup(it));
         } else {

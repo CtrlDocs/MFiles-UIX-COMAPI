@@ -21,3 +21,12 @@ CtrlDocs.JsUtils.EnsurePath = (obj, keys) => {
     }
     return cur;
 }
+
+CtrlDocs.JsUtils.isNumber = (value) => {
+    try {
+        const parsed = parseFloat(value);
+        return !isNaN(parsed) && isFinite(parsed);  
+    } catch (e) {
+        return false;
+    }
+}

@@ -7,7 +7,7 @@ CtrlDocs.AssociatedPropertyDefs = class AssociatedPropertyDefs extends Array {
 
     static ConvertFromNative(native) {
         if (!native) return [];
-        if (isNumber(native)) return [native];
+        if (CtrlDocs.JsUtils.isNumber(native)) return [native];
         if (CtrlDocs.Platform.IsNextGen()) {
             return native.map(it => new CtrlDocs.AssociatedPropertyDef(it));
         } else {

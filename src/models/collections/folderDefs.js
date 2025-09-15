@@ -16,7 +16,7 @@ CtrlDocs.FolderDefs = class FolderDefs extends Array {
 
     static ConvertFromNative(native) {
         if (!native) return [];
-        if (isNumber(native)) return [native];
+        if (CtrlDocs.JsUtils.isNumber(native)) return [native];
         if (CtrlDocs.Platform.IsNextGen()) {
             return native.folders.map(it => new CtrlDocs.FolderDef(it));
         } else {
