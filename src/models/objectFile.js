@@ -41,9 +41,9 @@ CtrlDocs.ObjectFile = class ObjectFile {
 
     get FileGUID() {
         if (CtrlDocs.Platform.IsNextGen()) {
-            return new CtrlDocs.FileVer(this.#native.guid);
+            return this.#native.guid;
         }
-        else return new CtrlDocs.FileVer(this.#native.FileGUID);
+        else return this.#native.FileGUID;
     }
     
     GetNative() {
