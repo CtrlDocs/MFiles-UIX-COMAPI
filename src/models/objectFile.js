@@ -38,6 +38,13 @@ CtrlDocs.ObjectFile = class ObjectFile {
             ? this.#native.EscapedName
             : `${this.Title}.${this.Extension}`;
     }
+
+    get FileGUID() {
+        if (CtrlDocs.Platform.IsNextGen()) {
+            return new CtrlDocs.FileVer(this.#native.guid);
+        }
+        else return new CtrlDocs.FileVer(this.#native.FileGUID);
+    }
     
     GetNative() {
         return this.#native;
