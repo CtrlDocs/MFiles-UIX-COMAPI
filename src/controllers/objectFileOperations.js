@@ -57,15 +57,6 @@ CtrlDocs.ObjectFileOperations = class ObjectFileOperations {
             }
         });
     }
-
-    #openMethodToString = (method) => {
-        switch (method) {
-            case 0: return undefined
-            case 1: return undefined
-            case 2: return "Read"
-            case 3: return "Edit"
-        }
-    }
     
     /**
      * @param window {number}
@@ -83,17 +74,12 @@ CtrlDocs.ObjectFileOperations = class ObjectFileOperations {
                             ? MFiles.BuiltinCommand.LaunchDefaultApp
 		                    : MFiles.BuiltinCommand.OpenInDesktopApp,
                             {
-                                //OpenMode: this.#openMethodToString(method), // TODO
+                                OpenForEditing: true,
                                 ObjectsInfo: {
                                     ObjectVersions: [
                                         objectVersion.GetNative()
                                     ],
-                                    ObjectFiles: [
-                                        //{
-                                        //    parent: objectVersion.GetNative(),
-                                        //    file_ver: fileVer.GetNative()
-                                        //}
-                                    ]
+                                    ObjectFiles: []
                                 }
                             });
                 });
