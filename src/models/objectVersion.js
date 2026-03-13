@@ -90,9 +90,9 @@ CtrlDocs.ObjectVersion = class ObjectVersion {
     get DisplayID() {
         if (CtrlDocs.Platform.IsNextGen()) {
             // Return external id if available, otherwise return internal id
-            return objectVersion.#native.object_info.external_id === '' 
-                ? objectVersion.#native.object_info.obj_id.item_id.internal_id 
-                : objectVersion.#native.object_info.external_id
+            return this.#native.object_info.external_id === '' 
+                ? this.#native.object_info.obj_id.item_id.internal_id 
+                : this.#native.object_info.external_id
         }
         else return this.#native.DisplayID;
     }

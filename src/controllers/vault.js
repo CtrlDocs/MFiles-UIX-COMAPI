@@ -24,6 +24,7 @@ CtrlDocs.Vault = class Vault {
         this.#native = vault;
         this.ShellFrame = shellFrame;
         this.ObjectOperations = new CtrlDocs.ObjectOperations(this);
+        this.ObjectSearchOperations = new CtrlDocs.ObjectSearchOperations(this);
         this.ObjectFileOperations = new CtrlDocs.ObjectFileOperations(this);
         this.ObjectPropertyOperations = new CtrlDocs.ObjectPropertyOperations(this);
         this.ExtensionMethodOperations = new CtrlDocs.ExtensionMethodOperations(this);

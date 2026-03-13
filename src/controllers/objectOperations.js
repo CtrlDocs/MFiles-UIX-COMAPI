@@ -92,7 +92,7 @@ CtrlDocs.ObjectOperations = class ObjectOperations {
                 });
                 return this.GetObjectInfo(requestedObjVer)
                     .then(objectVersion => resolve(objectVersion.ObjVer))
-                    .catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorObj)));
+                    .catch(errorObj => reject(CtrlDocs.MFilesError.GetVnextErrorHandler(errorMessage)(errorObj)));
                 
             } else this.#nativeAsync.GetLatestObjVer(objID.GetNative(), allowCheckedOut, updateFromServer,
                 (objVer) => resolve(
