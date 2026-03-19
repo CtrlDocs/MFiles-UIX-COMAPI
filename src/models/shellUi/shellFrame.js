@@ -59,8 +59,23 @@ CtrlDocs.ShellFrame = class ShellFrame {
         this.#native.ShowMessage(message);
     }
     
+    /**
+     * Removes any dashboards from the frame and restores the main pane view to its default contents.
+     * @returns {Promise<void>}
+     */
     ShowDefaultContent() {
-        this.#native.ShowDefaultContent();
+        return new Promise((resolve, reject) => {
+            if (CtrlDocs.Platform.IsNextGen()) {
+                return this.#native.ShowDefaultContent();
+            } else {
+                try {
+                    this.#native.ShowDefaultContent();
+                    resolve();
+                } catch (error) {
+                    reject(error);
+                }
+            }
+        });
     }
     
     ShowPopupDashboard(dashboardId, customData, titleOrOptions) {
