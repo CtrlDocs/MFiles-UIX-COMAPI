@@ -17,7 +17,9 @@ CtrlDocs.SessionInfo = class SessionInfo {
         if (CtrlDocs.Platform.IsNextGen()) {
             const editableLicenseTypes = [
                 'LICENSE_TYPE_NAMED_USER_LICENSE', 
-                'LICENSE_TYPE_CONCURRENT_USER_LICENSE'];
+                'LICENSE_TYPE_CONCURRENT_USER_LICENSE',
+                1, // Named
+                2]; // Concurrent
             
             return editableLicenseTypes.indexOf(this.#native.license_type) !== -1;
         }
